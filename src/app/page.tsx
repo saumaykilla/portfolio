@@ -155,7 +155,7 @@ export default function Home() {
               <div className="mb-8 xl:mb-0">
                 <div className="flex gap-6">
                   <Link
-                    href="https://github.com/saumay23"
+                    href="https://github.com/saumaykilla"
                     target="_"
                     className="w-9 h-9 border-accent border rounded-full flex justify-center
                      items-center text-accent text-base hover:bg-accent hover:text-white hover:transition-all duration-500"
