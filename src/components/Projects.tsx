@@ -201,10 +201,7 @@ export function Projects() {
             My{" "}
             <span className="text-blue-600 dark:text-blue-400">Projects</span>
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto leading-relaxed">
-            A showcase of my work across different industries, from healthcare
-            AI to social impact technology.
-          </p>
+        
         </motion.div>
 
         {/* Carousel Container */}
