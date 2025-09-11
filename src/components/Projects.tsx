@@ -43,6 +43,23 @@ export function Projects() {
         isPDF: false,
         link: "https://github.com/saumaykilla/Live-Trading-Ticker",
       },
+      {
+        category: "Full Stack Project",
+        title: "Product Market Analysis",
+        description:
+          "An Applciation that uses AI to generate strategies based on the business goals for products in a market.",
+        stack: [
+          "Next.js",
+          "FastAPI",
+          "Langchain",
+          "Gemini AI",
+          "Supabase",
+          "Python"
+        ],
+        image: "/Images/marketing.png",
+        isPDF: false,
+        link: "https://frontend-segment-ai.vercel.app/",
+      },
     {
       category: "Full Stack Project",
       title: "JobsHush",
