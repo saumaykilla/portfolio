@@ -5,7 +5,7 @@ const EXPERIENCE = [
       {
     id: 2,
     role: "Founding Full Stack Developer",
-    company: "Creative Pulse Agency",
+    company: "Humainority",
     period: "AUG 2024 - PRESENT",
     description:
       "Led the development of scalable web applications, designed robust APIs, and mentored a team of junior developers, significantly improving system performance.",
