@@ -1,0 +1,631 @@
+{
+  "site": {
+    "name": "Saumay Killa",
+    "firstName": "Saumay",
+    "role": "Software Developer · AI Engineer",
+    "location": "New York, NY",
+    "email": "saumaykilla@gmail.com",
+    "photo": "/saumay.png",
+    "headline": "I build modern web applications",
+    "headlineAccent": "that solve real problems.",
+    "bio": "I'm Saumay Killa, a software developer and AI engineer in New York. I work across frontend and backend — React, Next.js, TypeScript, Python, and AWS — and ship full stack products, from realtime AI platforms to production web apps people actually use.",
+    "handwritten": "Turning ideas into impact",
+    "ctaPrimary": {
+      "label": "View My Projects",
+      "href": "/#projects"
+    },
+    "ctaSecondary": {
+      "label": "Get in Touch",
+      "href": "/#contact"
+    },
+    "navCta": {
+      "label": "Let's Talk",
+      "href": "/#contact"
+    },
+    "navigation": [
+      { "label": "Home", "href": "/#home" },
+      { "label": "Projects", "href": "/#projects" },
+      { "label": "Work", "href": "/#work" },
+      { "label": "Skills", "href": "/#skills" },
+      { "label": "Achievements", "href": "/#achievements" },
+      { "label": "Contact", "href": "/#contact" }
+    ],
+    "social": [
+      {
+        "name": "Email",
+        "href": "mailto:saumaykilla@gmail.com",
+        "icon": "email"
+      },
+      {
+        "name": "LinkedIn",
+        "href": "https://www.linkedin.com/in/saumaykilla",
+        "icon": "linkedin"
+      },
+      {
+        "name": "GitHub",
+        "href": "https://github.com/saumaykilla",
+        "icon": "github"
+      }
+    ],
+    "techStack": [
+      { "name": "React", "icon": "react", "color": "#61DAFB" },
+      { "name": "Next.js", "icon": "nextdotjs", "color": "#000000" },
+      { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+      { "name": "Python", "icon": "python", "color": "#3776AB" },
+      { "name": "Node.js", "icon": "nodedotjs", "color": "#5FA04E" },
+      { "name": "AWS", "icon": "amazonaws", "color": "#FF9900" },
+      { "name": "FastAPI", "icon": "fastapi", "color": "#009688" }
+    ],
+    "footer": "© 2026 Saumay Killa. All rights reserved."
+  },
+  "projects": {
+    "eyebrow": "Selected Work",
+    "title": "Featured Projects",
+    "description": "Selected software engineering work: AI products, frontend web apps, backend services, and cloud tools.",
+    "filters": [
+      { "id": "all", "label": "All" },
+      { "id": "web", "label": "Web Apps" },
+      { "id": "ai", "label": "AI / LLM" },
+      { "id": "mobile", "label": "Mobile" },
+      { "id": "tools", "label": "Tools" }
+    ],
+    "items": [
+      {
+        "id": "velix",
+        "title": "Velix",
+        "subtitle": "AI marketing operating system",
+        "description": "A multi-agent marketing platform that turns a website URL into brand analysis, campaigns, personas, and publish-ready social assets.",
+        "longDescription": "Velix replaces a marketing team with LangGraph pipelines on Gemini. Paste a URL and it crawls the site, extracts brand voice and color, then runs Researcher → Persona → Strategy agents with a feedback loop. A second pipeline writes captions, generates images, and uploads assets to Supabase. The frontend is Next.js with workspace switching, Instagram-style preview, and approve/regenerate.",
+        "categories": ["ai"],
+        "tags": ["LangGraph", "Gemini", "Next.js"],
+        "year": "2026",
+        "preview": "platform",
+        "image": "/projects/velix.png",
+        "highlights": [
+          "URL-to-brand profile with crawl, color, and competitor analysis",
+          "LangGraph campaign and asset pipelines with a human feedback loop",
+          "Multi-workspace auth, storage, and approve/reject UI"
+        ],
+        "learnings": [
+          "Multi-agent graphs only feel like a product when a human can reject and regenerate a step.",
+          "Brand extraction is a retrieval problem first — bad crawl in, generic campaign out.",
+          "Workspace isolation is the real multi-tenant problem, not the model call."
+        ],
+        "technologies": [
+          { "name": "Next.js", "icon": "nextdotjs", "color": "#000000" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "FastAPI", "icon": "fastapi", "color": "#009688" },
+          { "name": "LangGraph", "icon": "langgraph", "color": "#1C3C3C" },
+          { "name": "Gemini", "icon": "googlegemini", "color": "#8E75B2" },
+          { "name": "Supabase", "icon": "supabase", "color": "#3FCF8E" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/velix" }
+        ]
+      },
+      {
+        "id": "homecart",
+        "title": "HomeCart",
+        "subtitle": "AR grocery companion for newcomers",
+        "description": "A mobile-first AI companion that helps immigrants decode US grocery aisles with match scores, substitutes, and a live Magic Lens.",
+        "longDescription": "HomeCart is a mobile product for people who just arrived in the US and find grocery stores overwhelming. Onboarding captures home country and language. In-store, Magic Lens uses computer vision to overlay match scores and cooking tips on products. Search in a home language returns US equivalents, quality flags, and lists that export to delivery apps. Built as a mobile-first React Native experience from the Cartographer repo.",
+        "categories": ["mobile"],
+        "tags": ["Mobile", "AI", "Computer Vision"],
+        "year": "2026",
+        "preview": "mobile",
+        "image": "/projects/homecart.png",
+        "highlights": [
+          "Magic Lens AR overlay with cultural match scores on shelf products",
+          "Home-language search with US substitutes and cooking tips",
+          "Profile-first onboarding by country and language"
+        ],
+        "learnings": [
+          "The grocery aisle is a UX problem of translation, not a bigger catalog.",
+          "AR only helps if the overlay answers one question: is this the right thing?",
+          "Mobile-first means the camera is the search bar."
+        ],
+        "technologies": [
+          { "name": "React Native", "icon": "react", "color": "#61DAFB" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "Expo", "icon": "expo", "color": "#000020" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/Cartographer" }
+        ]
+      },
+      {
+        "id": "klo",
+        "title": "Klo",
+        "subtitle": "Voice + camera AI stylist",
+        "description": "An Expo mobile app for live styling sessions — camera, voice, a LiveKit agent, and a RAG knowledge base of fashion documents.",
+        "longDescription": "Klo is a React Native / Expo client for realtime styling. Camera and microphone feed a LiveKit agent so a session feels like a call with a stylist, not a chatbot. A Python stylist-agent runs on LiveKit; KnowledgeIngestor chunks PDFs, embeds them with Gemini, and stores vectors in Supabase for retrieval during the session. Auth, image picker, and secure storage sit on the device.",
+        "categories": ["mobile", "ai"],
+        "tags": ["Expo", "LiveKit", "RAG"],
+        "year": "2026",
+        "preview": "mobile",
+        "image": "/projects/klo.png",
+        "highlights": [
+          "LiveKit voice and camera sessions from a React Native client",
+          "Stylist agent with RAG over ingested fashion documents",
+          "Expo auth, image picker, and secure session storage"
+        ],
+        "learnings": [
+          "Voice agents fail on mobile when audio session and WebRTC config are an afterthought.",
+          "A stylist is only as good as the documents you ingest — RAG is the product.",
+          "Realtime UI state on device has to survive backgrounding and flaky networks."
+        ],
+        "technologies": [
+          { "name": "React Native", "icon": "react", "color": "#61DAFB" },
+          { "name": "Expo", "icon": "expo", "color": "#000020" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "LiveKit", "icon": "livekit", "color": "#1FD5F9" },
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "Supabase", "icon": "supabase", "color": "#3FCF8E" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/Klo" }
+        ]
+      },
+      {
+        "id": "outreach-agent",
+        "title": "Outreach Agent",
+        "subtitle": "Research, personalize, draft, send",
+        "description": "An agentic outreach pipeline that researches a lead, personalizes a message, and drafts send-ready sequences instead of generic templates.",
+        "longDescription": "Outreach Agent is an AI pipeline for outbound that does not start with a blank email. Agents research the person and company, pull a hook from public context, and draft a sequence you can edit before send. It sits in the same agentic stack I use elsewhere — structured steps, a human in the loop, and no spray-and-pray copy.",
+        "categories": ["ai"],
+        "tags": ["Agents", "LLM", "Outreach"],
+        "year": "2026",
+        "preview": "agent",
+        "image": "/projects/outreach-agent.png",
+        "highlights": [
+          "Lead research before a single sentence is written",
+          "Personalized drafts instead of mail-merge templates",
+          "Human approval between draft and send"
+        ],
+        "learnings": [
+          "Outreach quality is a research problem; the model is the last mile.",
+          "A four-step graph beats one giant prompt when you need to debug a bad email.",
+          "If a human cannot edit the draft, nobody will trust the agent."
+        ],
+        "technologies": [
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "LangGraph", "icon": "langgraph", "color": "#1C3C3C" },
+          { "name": "Gemini", "icon": "googlegemini", "color": "#8E75B2" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/outreach-agent" }
+        ]
+      },
+      {
+        "id": "resume-studio",
+        "title": "Resume Studio",
+        "subtitle": "ATS-aware resumes and cover letters",
+        "description": "An AI microservice plus Next.js app that tailors resumes and cover letters to a job description and exports PDFs.",
+        "longDescription": "Resume Studio is the JobsHush writing engine: paste a job description, score keyword overlap, rewrite bullets, and export PDF or DOCX. The generator is a Python service (FastAPI, reportlab, python-docx) containerized for AWS Lambda. The frontend is a Next.js workspace with live preview, auth, and cloud storage so a tailored packet is one click from a posting.",
+        "categories": ["ai", "web"],
+        "tags": ["AI", "FastAPI", "PDF"],
+        "year": "2025",
+        "preview": "documents",
+        "image": "/projects/resume-studio.png",
+        "highlights": [
+          "Job-description scoring and ATS-aware rewrites",
+          "PDF and DOCX export from a Lambda-ready Python service",
+          "Next.js live preview and document workspace"
+        ],
+        "learnings": [
+          "Users trust generated copy when every line is editable before export.",
+          "Document generation belongs on the server; browsers are a poor print engine.",
+          "Keyword overlap is a simple eval that makes a black-box LLM inspectable."
+        ],
+        "technologies": [
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "FastAPI", "icon": "fastapi", "color": "#009688" },
+          { "name": "Next.js", "icon": "nextdotjs", "color": "#000000" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "AWS", "icon": "amazonaws", "color": "#FF9900" },
+          { "name": "Docker", "icon": "docker", "color": "#2496ED" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/resume-cv-letter-service" },
+          { "label": "Frontend", "href": "https://github.com/saumaykilla/jobshush-frontend" }
+        ]
+      },
+      {
+        "id": "live-ticker",
+        "title": "Live Ticker",
+        "subtitle": "Realtime crypto price dashboard",
+        "description": "A full-stack trading dashboard that scrapes live prices with Playwright and keeps multiple tickers updating without thrashing the UI.",
+        "longDescription": "Live Trading Ticker is a React + TypeScript frontend with a Node/Express backend. Playwright scrapes live cryptocurrency prices; the UI charts, filters, and refreshes several tickers at once. Ingestion is isolated from rendering so a flaky source does not freeze the dashboard. Built as a pnpm workspace with protobuf contracts between client and server.",
+        "categories": ["web"],
+        "tags": ["Realtime", "Playwright", "React"],
+        "year": "2025",
+        "preview": "charts",
+        "image": "/projects/live-ticker.png",
+        "highlights": [
+          "Playwright-powered live price ingestion",
+          "Multi-ticker charts with continuous refresh",
+          "Client/server contracts in a pnpm workspace"
+        ],
+        "learnings": [
+          "High-frequency UI is a rendering budget — update dirty rows, not the whole page.",
+          "Scraping is brittle; isolate ingestion so the dashboard survives a source blip.",
+          "Typed contracts between scraper and UI prevent silent schema drift."
+        ],
+        "technologies": [
+          { "name": "React", "icon": "react", "color": "#61DAFB" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "Node.js", "icon": "nodedotjs", "color": "#5FA04E" },
+          { "name": "Playwright", "icon": "playwright", "color": "#2EAD33" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/Live-Trading-Ticker" }
+        ]
+      },
+      {
+        "id": "trending-movies",
+        "title": "Trending Movies",
+        "subtitle": "Discover what's moving right now",
+        "description": "A movie discovery web app with trending lists, search, ratings, and favorites on top of live TMDB data.",
+        "longDescription": "Trending Movies is a TypeScript frontend that pulls live charts from The Movie Database. Browse trending titles, search by name or genre, open details and ratings, and save favorites. The UI is built around fast cards and filters so discovery feels like a product, not an API demo.",
+        "categories": ["web"],
+        "tags": ["React", "TMDB", "TypeScript"],
+        "year": "2025",
+        "preview": "platform",
+        "image": "/projects/trending-movies.png",
+        "highlights": [
+          "Live trending lists and search from TMDB",
+          "Genre, year, and rating filters",
+          "Favorites that persist across sessions"
+        ],
+        "learnings": [
+          "A discovery feed lives or dies on image performance and empty states.",
+          "Third-party APIs need a thin client so the UI can mock, cache, and fail softly.",
+          "Filters should feel instant even when the catalog is remote."
+        ],
+        "technologies": [
+          { "name": "React", "icon": "react", "color": "#61DAFB" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "Node.js", "icon": "nodedotjs", "color": "#5FA04E" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/trendingMovies" }
+        ]
+      },
+      {
+        "id": "rag-ingestor",
+        "title": "RAG Ingestor",
+        "subtitle": "PDFs in, grounded answers out",
+        "description": "A Python ingest pipeline that loads documents, chunks them, embeds with Gemini, and writes a vector store for retrieval.",
+        "longDescription": "RAG Ingestor is the document side of my agent stack. One path loads PDFs, splits with overlap, rotates Gemini embedding keys, and upserts into Supabase pgvector. Another path runs a LangChain RAG loop against Pinecone or FAISS for question answering with citations. The point is a repeatable ingest job, not a notebook that only works once.",
+        "categories": ["tools", "ai"],
+        "tags": ["RAG", "Python", "Embeddings"],
+        "year": "2026",
+        "preview": "insights",
+        "image": "/projects/rag-ingestor.png",
+        "highlights": [
+          "PDF load → chunk → Gemini embed → Supabase vector store",
+          "LangChain retrieval with Pinecone or FAISS fallbacks",
+          "Batch ingest with API-key rotation for long document sets"
+        ],
+        "learnings": [
+          "Chunk boundaries matter more than the embedding model for retrieval quality.",
+          "Ingest has to be idempotent or you will double-index every retry.",
+          "A vector table is infrastructure — treat it like a migration, not a side effect."
+        ],
+        "technologies": [
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "LangChain", "icon": "langchain", "color": "#1C3C3C" },
+          { "name": "Gemini", "icon": "googlegemini", "color": "#8E75B2" },
+          { "name": "Supabase", "icon": "supabase", "color": "#3FCF8E" },
+          { "name": "Pinecone", "icon": "pinecone", "color": "#1A1A2E" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/RAG-Pipeline-Python" },
+          { "label": "Klo ingest", "href": "https://github.com/saumaykilla/Klo" }
+        ]
+      },
+      {
+        "id": "eventflow",
+        "title": "AWS Eventflow",
+        "subtitle": "S3 → SQS → Lambda, as code",
+        "description": "Terraform for a serverless file pipeline: upload to S3, enqueue on SQS, process with Lambda, recover on a DLQ.",
+        "longDescription": "A 100% HCL Terraform stack that wires S3 event notifications to SQS, a Lambda consumer, IAM, and ECR. Files land in a bucket, messages buffer on the queue, Lambda processes them, and failures go to a dead-letter queue instead of disappearing. One apply stands the path up; one destroy tears it down. No console clicking.",
+        "categories": ["tools"],
+        "tags": ["AWS", "Terraform", "Serverless"],
+        "year": "2026",
+        "preview": "cloud",
+        "image": "/projects/eventflow-aws.png",
+        "highlights": [
+          "S3 events → SQS buffer → Lambda worker in Terraform",
+          "IAM, ECR, and queue wiring checked into git",
+          "Dead-letter path for failed processing"
+        ],
+        "learnings": [
+          "If it is not in Terraform, it does not exist — console setup is a liability.",
+          "SQS is the retry layer; Lambda should stay a pure worker.",
+          "DLQs are how you debug production async work."
+        ],
+        "technologies": [
+          { "name": "AWS", "icon": "amazonaws", "color": "#FF9900" },
+          { "name": "Terraform", "icon": "terraform", "color": "#844FBA" },
+          { "name": "Lambda", "icon": "awslambda", "color": "#FF9900" },
+          { "name": "Docker", "icon": "docker", "color": "#2496ED" }
+        ],
+        "links": [
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/AWS-S3-sqs-lambda" }
+        ]
+      }
+    ]
+  },
+  "work": {
+    "eyebrow": "My Experience",
+    "title": "Where I've Worked",
+    "description": "Software engineering roles across frontend, backend, AI, and full stack product teams.",
+    "items": [
+      {
+        "id": "humainority",
+        "company": "HumAInority",
+        "logo": "H",
+        "logoColor": "#C45A38",
+        "role": "Founding Engineer / Full Stack",
+        "location": "New York, NY",
+        "start": "Sep 2024",
+        "end": "Present",
+        "summary": "Owning the UI system, realtime layer, and serverless backend for an AI platform that expands career access.",
+        "bullets": [
+          "Owned the full UI component system, translating generative model output into WCAG 2.2 production React components used across the product.",
+          "Architected a Zustand state layer for concurrent WebSocket streams and async AI responses, keeping perceived latency under 200ms.",
+          "Designed AWS serverless infrastructure (Lambda, SQS, Postgres) and cut overhead ~40%, saving around $600 / month.",
+          "Introduced Jest, React Testing Library, and E2E coverage into CI/CD, compressing release cycles by 60%.",
+          "Redesigned onboarding with resume parsing and a multi-step flow, lifting completion by 60%."
+        ],
+        "technologies": [
+          { "name": "React", "icon": "react", "color": "#61DAFB" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "AWS", "icon": "amazonaws", "color": "#FF9900" },
+          { "name": "Python", "icon": "python", "color": "#3776AB" }
+        ]
+      },
+      {
+        "id": "sap-concur",
+        "company": "SAP Concur",
+        "logo": "S",
+        "logoColor": "#0070F2",
+        "role": "Market Strategy Consultant",
+        "location": "New York, NY",
+        "start": "Jan 2025",
+        "end": "May 2025",
+        "summary": "Go-to-market work for SAP Concur's mid-market segment — a useful complement to shipping product.",
+        "bullets": [
+          "Collaborated on a go-to-market strategy targeting the mid-market segment.",
+          "Ran market research and competitive analysis, and defined ideal customer profiles.",
+          "Turned findings into pitch decks and recommendations for mid-market acquisition."
+        ],
+        "technologies": [
+          { "name": "Research", "icon": "search", "color": "#C45A38" },
+          { "name": "Strategy", "icon": "strategy", "color": "#0070F2" }
+        ]
+      },
+      {
+        "id": "wiz",
+        "company": "Wiz Freight",
+        "logo": "W",
+        "logoColor": "#2B5CFF",
+        "role": "Software Developer",
+        "location": "Chennai",
+        "start": "Apr 2022",
+        "end": "Jul 2023",
+        "summary": "Frontend platform work at a logistics startup — component library, marketing rewrite, and sprint velocity.",
+        "bullets": [
+          "Built WIZ's first centralized React component library, standardizing patterns and cutting new feature time by ~20%.",
+          "Rebuilt the marketing site in React + Tailwind with a Core Web Vitals focus: 40% faster loads and a 15% lift in trial conversions.",
+          "Optimized Redux usage to cut network requests ~25% and improve time-to-interactive by 1.2s.",
+          "Drove engineering / product / design alignment in a fast-moving startup, contributing to a 20% increase in sprint velocity."
+        ],
+        "technologies": [
+          { "name": "React", "icon": "react", "color": "#61DAFB" },
+          { "name": "Tailwind CSS", "icon": "tailwindcss", "color": "#06B6D4" },
+          { "name": "Redux", "icon": "redux", "color": "#764ABC" },
+          { "name": "JavaScript", "icon": "javascript", "color": "#F7DF1E" }
+        ]
+      },
+      {
+        "id": "highradius",
+        "company": "HighRadius",
+        "logo": "Hr",
+        "logoColor": "#F36F21",
+        "role": "Software Engineer",
+        "location": "Bhubaneswar",
+        "start": "Aug 2021",
+        "end": "Mar 2022",
+        "summary": "ML forecasting and reporting automation for finance teams on the order-to-cash platform.",
+        "bullets": [
+          "Trained invoice-clearance models that improved forecast accuracy ~16% and reduced payment uncertainty for finance teams.",
+          "Automated client-specific Excel reporting in Python, cutting weekly manual prep by ~40% per client team.",
+          "Worked with data engineers to optimize feature pipelines, shrinking model training time ~25%."
+        ],
+        "technologies": [
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "Machine Learning", "icon": "pytorch", "color": "#EE4C2C" },
+          { "name": "Excel", "icon": "microsoftexcel", "color": "#217346" }
+        ]
+      }
+    ],
+    "education": [
+      {
+        "id": "nyu",
+        "school": "New York University",
+        "degree": "Master of Science",
+        "field": "Management Information Systems",
+        "location": "New York, NY"
+      },
+      {
+        "id": "srm",
+        "school": "SRM Institute of Science and Technology",
+        "degree": "Bachelor of Technology",
+        "field": "Computer Science",
+        "location": "India"
+      }
+    ]
+  },
+  "skills": {
+    "eyebrow": "Technical Skills",
+    "title": "Tools & Technologies",
+    "description": "Frontend, backend, cloud, and AI engineering tools I use as a software developer — React, Next.js, TypeScript, Python, AWS, and more.",
+    "handwritten": "Always learning, always building",
+    "categories": [
+      {
+        "id": "frontend",
+        "name": "Frontend",
+        "icon": "layout",
+        "description": "Interfaces people actually enjoy using.",
+        "skills": [
+          { "name": "React", "icon": "react", "color": "#61DAFB" },
+          { "name": "Next.js", "icon": "nextdotjs", "color": "#000000" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "Tailwind CSS", "icon": "tailwindcss", "color": "#06B6D4" },
+          { "name": "HTML5", "icon": "html5", "color": "#E34F26" },
+          { "name": "CSS3", "icon": "css3", "color": "#1572B6" },
+          { "name": "React Native", "icon": "react", "color": "#61DAFB" },
+          { "name": "Expo", "icon": "expo", "color": "#000020" }
+        ]
+      },
+      {
+        "id": "backend",
+        "name": "Backend",
+        "icon": "server",
+        "description": "APIs, streams, and the glue in between.",
+        "skills": [
+          { "name": "Node.js", "icon": "nodedotjs", "color": "#5FA04E" },
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "FastAPI", "icon": "fastapi", "color": "#009688" },
+          { "name": "Express", "icon": "express", "color": "#000000" },
+          { "name": "GraphQL", "icon": "graphql", "color": "#E10098" },
+          { "name": "REST APIs", "icon": "rest", "color": "#C45A38" },
+          { "name": "LangGraph", "icon": "langgraph", "color": "#1C3C3C" },
+          { "name": "WebSockets", "icon": "socketdotio", "color": "#010101" }
+        ]
+      },
+      {
+        "id": "cloud",
+        "name": "Databases & Cloud",
+        "icon": "cloud",
+        "description": "Where the data lives and how it scales.",
+        "skills": [
+          { "name": "PostgreSQL", "icon": "postgresql", "color": "#4169E1" },
+          { "name": "Redis", "icon": "redis", "color": "#FF4438" },
+          { "name": "Supabase", "icon": "supabase", "color": "#3FCF8E" },
+          { "name": "AWS", "icon": "amazonaws", "color": "#FF9900" },
+          { "name": "Docker", "icon": "docker", "color": "#2496ED" },
+          { "name": "Kubernetes", "icon": "kubernetes", "color": "#326CE5" }
+        ]
+      },
+      {
+        "id": "ai",
+        "name": "AI & Tools",
+        "icon": "spark",
+        "description": "Models, agents, and the craft around them.",
+        "skills": [
+          { "name": "OpenAI", "icon": "openai", "color": "#412991" },
+          { "name": "Gemini", "icon": "googlegemini", "color": "#8E75B2" },
+          { "name": "Claude", "icon": "anthropic", "color": "#D4A27F" },
+          { "name": "LangChain", "icon": "langchain", "color": "#1C3C3C" },
+          { "name": "Jest", "icon": "jest", "color": "#C21325" },
+          { "name": "Playwright", "icon": "playwright", "color": "#2EAD33" },
+          { "name": "Git", "icon": "git", "color": "#F05032" }
+        ]
+      }
+    ]
+  },
+  "achievements": {
+    "eyebrow": "Key Achievements",
+    "title": "Milestones & Impact",
+    "description": "Some highlights from the journey so far.",
+    "banner": "Built products. Solved problems. Created impact.",
+    "quote": "Build things that make people's lives easier.",
+    "items": [
+      {
+        "id": "requests",
+        "value": "50K+",
+        "label": "monthly requests",
+        "context": "Production",
+        "icon": "activity"
+      },
+      {
+        "id": "uptime",
+        "value": "99.9%",
+        "label": "API uptime",
+        "context": "Production",
+        "icon": "shield"
+      },
+      {
+        "id": "cost",
+        "value": "~40%",
+        "label": "API cost optimization",
+        "context": "AWS serverless",
+        "icon": "trend"
+      },
+      {
+        "id": "reporting",
+        "value": "+40%",
+        "label": "reporting turnaround",
+        "context": "HighRadius",
+        "icon": "clock"
+      },
+      {
+        "id": "onboarding",
+        "value": "+60%",
+        "label": "onboarding completion",
+        "context": "HumAInority",
+        "icon": "spark"
+      },
+      {
+        "id": "lighthouse",
+        "value": "95+",
+        "label": "Lighthouse score",
+        "context": "Production frontend",
+        "icon": "zap"
+      }
+    ]
+  },
+  "contact": {
+    "eyebrow": "Let's Connect",
+    "title": "Get In Touch",
+    "description": "I'm always open to discussing new opportunities, collaborating on interesting projects, or just having a chat.",
+    "handwritten": "Let's build something great!",
+    "submitLabel": "Send Message",
+    "successTitle": "Message ready to send",
+    "successMessage": "Your email app should be open with the note filled in. If nothing happened, write me directly — I read everything.",
+    "fields": [
+      {
+        "name": "name",
+        "label": "Name",
+        "type": "text",
+        "placeholder": "Your name",
+        "required": true
+      },
+      {
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "placeholder": "you@email.com",
+        "required": true
+      },
+      {
+        "name": "subject",
+        "label": "Subject",
+        "type": "text",
+        "placeholder": "What's this about?",
+        "required": true
+      },
+      {
+        "name": "message",
+        "label": "Message",
+        "type": "textarea",
+        "placeholder": "Tell me a bit about it...",
+        "required": true
+      }
+    ]
+  }
+}

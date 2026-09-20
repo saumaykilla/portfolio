@@ -1,23 +1,81 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import { Caveat, Outfit, Sora } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
+import { AppShell } from "@/components/AppShell";
+import { JsonLd } from "@/components/JsonLd";
+import { SITE_URL, seo } from "@/lib/seo";
+import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const outfit = Outfit({
   subsets: ["latin"],
+  variable: "--font-outfit",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const sora = Sora({
   subsets: ["latin"],
+  variable: "--font-sora",
+});
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
 });
 
 export const metadata: Metadata = {
-  title: "Saumay's Portfolio",
-  icons:{
-    icon:"/saumay.png"
-  }
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: seo.title,
+    template: `%s — ${seo.name}`,
+  },
+  description: seo.description,
+  keywords: seo.keywords,
+  authors: [{ name: seo.name, url: SITE_URL }],
+  creator: seo.name,
+  publisher: seo.name,
+  category: "technology",
+  applicationName: `${seo.name} Portfolio`,
+  alternates: {
+    canonical: "/",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  openGraph: {
+    type: "profile",
+    locale: "en_US",
+    url: SITE_URL,
+    siteName: `${seo.name} — Software Developer & AI Engineer`,
+    title: seo.title,
+    description: seo.description,
+    firstName: seo.firstName,
+    lastName: "Killa",
+    username: "saumaykilla",
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: seo.title,
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seo.title,
+    description: seo.description,
+  },
+  formatDetection: {
+    email: false,
+    telephone: false,
+  },
 };
 
 export default function RootLayout({
@@ -26,22 +84,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-          integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-          crossOrigin="anonymous"
-          referrerPolicy="no-referrer"
-        />
-      </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-              <Analytics/>
-
+    <html
+      lang="en"
+      className={`${outfit.variable} ${sora.variable} ${caveat.variable} h-full antialiased`}
+    >
+      <body className="min-h-full bg-cream font-sans text-ink">
+        <JsonLd />
+        <AppShell>{children}</AppShell>
+        <Analytics />
       </body>
     </html>
   );
