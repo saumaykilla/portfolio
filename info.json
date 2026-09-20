@@ -54,7 +54,7 @@
       { "name": "Python", "icon": "python", "color": "#3776AB" },
       { "name": "Node.js", "icon": "nodedotjs", "color": "#5FA04E" },
       { "name": "AWS", "icon": "amazonaws", "color": "#FF9900" },
-      { "name": "FastAPI", "icon": "fastapi", "color": "#009688" }
+      { "name": "LiveKit", "icon": "livekit", "color": "#1FD5F9" }
     ],
     "footer": "© 2026 Saumay Killa. All rights reserved."
   },
@@ -70,6 +70,41 @@
       { "id": "tools", "label": "Tools" }
     ],
     "items": [
+      {
+        "id": "consensus-ai",
+        "title": "Consensus AI",
+        "subtitle": "Meetings with a memory",
+        "description": "A realtime meeting agent that joins the call as CC, listens silently, and interjects when the team reopens a decision already made.",
+        "longDescription": "Consensus AI is a meeting assistant and collaboration platform. CC joins LiveKit rooms as a participant, stays quiet by default, and speaks only when addressed or when Pinecone retrieval shows the topic was already decided. After the call it writes a Gemini summary — decisions, owners, due dates — into SpacetimeDB and indexes the transcript so the next meeting has company memory. The Next.js app covers auth, chat, scheduling, video, and summaries without a REST backend.",
+        "categories": ["ai", "web"],
+        "tags": ["LiveKit", "Gemini", "RAG"],
+        "year": "2026",
+        "preview": "platform",
+        "image": "/projects/consensus-ai.png",
+        "highlights": [
+          "LiveKit agent that listens, then interjects from past-meeting RAG",
+          "Gemini realtime voice plus structured summaries after the call",
+          "SpacetimeDB for chat, meetings, and summaries — no REST API"
+        ],
+        "learnings": [
+          "A meeting agent is useful when it stays silent — speak only with retrieved proof.",
+          "Realtime voice and company memory are different systems; wire them at shutdown.",
+          "If all app state lives in SpacetimeDB, the frontend can subscribe instead of polling."
+        ],
+        "technologies": [
+          { "name": "Next.js", "icon": "nextdotjs", "color": "#000000" },
+          { "name": "TypeScript", "icon": "typescript", "color": "#3178C6" },
+          { "name": "LiveKit", "icon": "livekit", "color": "#1FD5F9" },
+          { "name": "Python", "icon": "python", "color": "#3776AB" },
+          { "name": "Gemini", "icon": "googlegemini", "color": "#8E75B2" },
+          { "name": "Pinecone", "icon": "pinecone", "color": "#1A1A2E" },
+          { "name": "SpacetimeDB", "icon": "spacetimedb", "color": "#FF5C00" }
+        ],
+        "links": [
+          { "label": "Live Demo", "href": "https://concensus-ai.vercel.app/" },
+          { "label": "GitHub", "href": "https://github.com/saumaykilla/concensus-ai" }
+        ]
+      },
       {
         "id": "velix",
         "title": "Velix",
@@ -504,6 +539,7 @@
           { "name": "GraphQL", "icon": "graphql", "color": "#E10098" },
           { "name": "REST APIs", "icon": "rest", "color": "#C45A38" },
           { "name": "LangGraph", "icon": "langgraph", "color": "#1C3C3C" },
+          { "name": "LiveKit", "icon": "livekit", "color": "#1FD5F9" },
           { "name": "WebSockets", "icon": "socketdotio", "color": "#010101" }
         ]
       },
@@ -516,6 +552,8 @@
           { "name": "PostgreSQL", "icon": "postgresql", "color": "#4169E1" },
           { "name": "Redis", "icon": "redis", "color": "#FF4438" },
           { "name": "Supabase", "icon": "supabase", "color": "#3FCF8E" },
+          { "name": "Pinecone", "icon": "pinecone", "color": "#1A1A2E" },
+          { "name": "SpacetimeDB", "icon": "spacetimedb", "color": "#FF5C00" },
           { "name": "AWS", "icon": "amazonaws", "color": "#FF9900" },
           { "name": "Docker", "icon": "docker", "color": "#2496ED" },
           { "name": "Kubernetes", "icon": "kubernetes", "color": "#326CE5" }

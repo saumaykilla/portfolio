@@ -19,6 +19,7 @@ import {
   SiJest,
   SiKubernetes,
   SiLangchain,
+  SiLivekit,
   SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
@@ -71,6 +72,7 @@ const SIMPLE_ICONS: Record<string, IconType> = {
   claude: SiAnthropic,
   langchain: SiLangchain,
   langgraph: SiLangchain,
+  livekit: SiLivekit,
   jest: SiJest,
   git: SiGit,
   github: SiGithub,
@@ -232,6 +234,25 @@ function OpenAiIcon({ className }: { className?: string }) {
   );
 }
 
+function PineconeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <path d="M12 3 7 8.2 12 21 17 8.2 12 3Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" />
+      <path d="M8.2 9.5h7.6M9.4 13h5.2M10.6 16.5h2.8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function SpacetimeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
+      <circle cx="12" cy="12" r="3.2" stroke="currentColor" strokeWidth="1.8" />
+      <ellipse cx="12" cy="12" rx="9" ry="4.2" stroke="currentColor" strokeWidth="1.6" />
+      <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function PlaywrightIcon({ className }: { className?: string }) {
   return (
     <svg viewBox="0 0 24 24" fill="none" className={className} aria-hidden>
@@ -268,6 +289,9 @@ const CUSTOM_ICONS: Record<string, IconType> = {
   strategy: StrategyIcon,
   rest: RestIcon,
   openai: OpenAiIcon,
+  pinecone: PineconeIcon,
+  spacetimedb: SpacetimeIcon,
+  spacetime: SpacetimeIcon,
   playwright: PlaywrightIcon,
   microsoftexcel: ExcelIcon,
   excel: ExcelIcon,
