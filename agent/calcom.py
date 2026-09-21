@@ -107,14 +107,146 @@ def _parse_preferred_time(value: str) -> tuple[int, int | None] | None:
 
 
 def _window_hours(part_of_day: str, preferred_time: str) -> tuple[int, int] | None:
-    preferred = _parse_preferred_time(preferred_time)
-    if preferred:
-        hour, minute = preferred
-        start_min = hour * 60 + (minute or 0)
-        # 3pm / 15:00 means that hour; 3:30 means that exact start.
-        span = 1 if minute not in (None, 0) else 60
-        return start_min, start_min + span
+    # Clock times are matched exactly elsewhere. Do not treat 3pm as the whole hour.
+    if _parse_preferred_time(preferred_time):
+        return None
     return PART_OF_DAY_HOURS.get(_normalize_part_of_day(part_of_day))
+
+
+def _instant(slot: str) -> datetime | None:
+    dt = _parse_iso(slot)
+    if dt is None:
+        return None
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=timezone.utc)
+    return dt.astimezone(timezone.utc).replace(microsecond=0)
+
+
+def _to_utc_start(slot: str) -> str | None:
+    dt = _instant(slot)
+    if dt is None:
+        return None
+    return dt.strftime("%Y-%m-%dT%H:%M:%S.000Z")
+
+
+def _exact_clock_slots(
+    slots: list[str],
+    time_zone: str,
+    preferred_time: str,
+    on_date: str | None = None,
+) -> list[str]:
+    parsed = _parse_preferred_time(preferred_time)
+    if not parsed:
+        return []
+    hour, minute = parsed
+    minute = minute or 0
+    found: list[str] = []
+    for slot in slots:
+        local = _as_local(slot, time_zone)
+        if local is None:
+            continue
+        if on_date and local.date().isoformat() != on_date:
+            continue
+        if local.hour == hour and local.minute == minute:
+            found.append(slot)
+    return found
+
+
+def _requested_target(
+    preferred_time: str,
+    time_zone: str,
+    start_date: str | None = None,
+) -> datetime | None:
+    instant = _instant(preferred_time)
+    if instant:
+        return instant
+    parsed = _parse_preferred_time(preferred_time)
+    if not parsed:
+        return None
+    hour, minute = parsed
+    minute = minute or 0
+    tz = _zone(time_zone)
+    if start_date:
+        try:
+            year, month, day = (int(part) for part in start_date.split("-"))
+            return datetime(year, month, day, hour, minute, tzinfo=tz)
+        except ValueError:
+            pass
+    now = datetime.now(tz)
+    target = now.replace(hour=hour, minute=minute, second=0, microsecond=0)
+    if target < now:
+        target += timedelta(days=1)
+    return target
+
+
+def _closest_slots(slots: list[str], target: datetime, limit: int = 3) -> list[str]:
+    goal = target.astimezone(timezone.utc).replace(microsecond=0)
+    after: list[tuple[float, str]] = []
+    before: list[tuple[float, str]] = []
+    for slot in slots:
+        got = _instant(slot)
+        if got is None or got == goal:
+            continue
+        delta = (got - goal).total_seconds()
+        if delta > 0:
+            after.append((delta, slot))
+        else:
+            before.append((-delta, slot))
+    after.sort()
+    before.sort()
+    ordered = [slot for _, slot in after] + [slot for _, slot in before]
+    closest: list[str] = []
+    seen: set[str] = set()
+    for slot in ordered:
+        if slot in seen:
+            continue
+        seen.add(slot)
+        closest.append(slot)
+        if len(closest) >= limit:
+            break
+    return closest
+
+
+def _find_slot(start: str, slots: list[str], time_zone: str) -> str | None:
+    target = _instant(start)
+    if target:
+        for slot in slots:
+            got = _instant(slot)
+            if got and got == target:
+                return slot
+        return None
+    exact = _exact_clock_slots(slots, time_zone, start)
+    return exact[0] if exact else None
+
+
+def _usable_email(value: str) -> bool:
+    text = (value or "").strip()
+    if "@" not in text:
+        return False
+    domain = text.rsplit("@", 1)[-1]
+    return "." in domain and not domain.lower().endswith("example.com")
+
+
+def _booking_error(response: httpx.Response) -> str:
+    try:
+        payload = response.json()
+    except Exception:
+        payload = {}
+    detail = ""
+    if isinstance(payload, dict):
+        error = payload.get("error")
+        if isinstance(error, dict):
+            detail = str(error.get("message") or "")
+        detail = detail or str(payload.get("message") or "")
+    if "email" in detail.lower():
+        return (
+            f"Booking failed because the email is not usable ({detail}). "
+            "Ask for a real inbox that can receive mail, then call schedule_call again with the same start."
+        )
+    return (
+        f"Booking failed ({response.status_code}{': ' + detail if detail else ''}). "
+        "Do not claim it is booked. Ask them to pick another listed slot or use Let's Talk."
+    )
 
 
 def _flatten_slots(payload: dict) -> list[str]:
@@ -169,7 +301,9 @@ def _query_range(
     now = datetime.now(_zone(time_zone))
     start_date = start or now.date().isoformat()
     end_date = end or (start if start else (now + timedelta(days=10)).date().isoformat())
-    bounds = _window_hours(part_of_day, preferred_time)
+    if _parse_preferred_time(preferred_time):
+        return start_date, end_date
+    bounds = _window_hours(part_of_day, "")
     if bounds is None or start_date != end_date:
         return start_date, end_date
 
@@ -241,9 +375,10 @@ def _format_offer(slots: list[str], matched_request: bool = False) -> str:
     more = " More times exist; if they want a different window, search again." if len(slots) > 3 else ""
     if matched_request:
         next_step = (
-            "These times match what they asked for. Tell them it is available, conversationally. "
+            "These times match the requested morning/afternoon/evening window. "
+            "Tell them that window has openings, conversationally. "
             "Ask if they want to proceed. Do not also ask about another time this turn. "
-            "Vary your wording from the previous message."
+            "If they say yes, call schedule_call with one of these exact start timestamps."
         )
     else:
         next_step = (
@@ -254,6 +389,35 @@ def _format_offer(slots: list[str], matched_request: bool = False) -> str:
     return f"{next_step}{more}\n" + "\n".join(f"- {slot}" for slot in offered)
 
 
+def _format_clock_result(preferred_time: str, exact: list[str], closest: list[str]) -> str:
+    if exact:
+        offered = exact[:3]
+        return (
+            f"EXACT MATCH for {preferred_time}. This exact clock time is available. "
+            "Say that this time is free. Do not substitute a different time. "
+            "Ask if they want to proceed. If they say yes, call schedule_call with this exact start:\n"
+            + "\n".join(f"- {slot}" for slot in offered)
+        )
+    if closest:
+        nearest = closest[0]
+        extras = closest[1:3]
+        extra_line = (
+            "\nOther nearby real slots:\n" + "\n".join(f"- {slot}" for slot in extras)
+            if extras
+            else ""
+        )
+        return (
+            f"NOT AVAILABLE: {preferred_time} is not an open Cal.com slot. "
+            "Do not say that time is free. Tell them it is not available. "
+            "Recommend this next closest real slot and ask if they want to proceed with it instead. "
+            f"If they agree, call schedule_call with this exact start:\n- {nearest}{extra_line}"
+        )
+    return (
+        f"NOT AVAILABLE: {preferred_time} is not open, and no nearby Cal.com slots were found. "
+        "Do not invent a time. Ask if there is some other time you could look into."
+    )
+
+
 async def get_available_slots(
     start: str | None = None,
     end: str | None = None,
@@ -261,19 +425,43 @@ async def get_available_slots(
     part_of_day: str = "",
     preferred_time: str = "",
 ) -> str:
-    slots, error = await _slot_starts(start, end, time_zone, part_of_day, preferred_time)
+    clock = (preferred_time or "").strip()
+    search_end = end
+    if clock and start and (not end or end == start):
+        try:
+            search_end = (datetime.fromisoformat(start).date() + timedelta(days=3)).isoformat()
+        except ValueError:
+            search_end = end
+    slots, error = await _slot_starts(start, search_end, time_zone, part_of_day, clock)
+    if clock and (error or not slots):
+        widen_start = start or datetime.now(_zone(time_zone)).date().isoformat()
+        try:
+            base = datetime.fromisoformat(widen_start).date()
+        except ValueError:
+            base = datetime.now(_zone(time_zone)).date()
+        slots, error = await _slot_starts(
+            base.isoformat(),
+            (base + timedelta(days=7)).isoformat(),
+            time_zone,
+        )
     if error:
         return error
 
-    matched = _filter_slots(slots, time_zone, part_of_day, preferred_time)
-    requested = _normalize_part_of_day(part_of_day) or (preferred_time or "").strip()
+    if clock:
+        exact = _exact_clock_slots(slots, time_zone, clock, start)
+        target = _requested_target(clock, time_zone, start)
+        closest = _closest_slots(slots, target) if target else slots[:3]
+        return _format_clock_result(clock, exact, closest)
+
+    matched = _filter_slots(slots, time_zone, part_of_day, "")
+    requested = _normalize_part_of_day(part_of_day)
     if requested and not matched:
-        alternatives = slots[:3]
-        listed = "\n".join(f"- {slot}" for slot in alternatives)
+        closest = slots[:3]
+        listed = "\n".join(f"- {slot}" for slot in closest)
         return (
-            f"Cal.com has no slots matching {_label_request(start, end, time_zone, part_of_day, preferred_time)}. "
+            f"Cal.com has no slots matching {_label_request(start, end, time_zone, part_of_day, '')}. "
             "Do not assume that time is free. Tell them it is not available. "
-            "You may offer at most 3 of these other real slots, then ask if another time would help, with different wording than last turn.\n"
+            "Recommend the next closest real slots and ask if they want to proceed with one of them.\n"
             f"{listed}"
         )
     return _format_offer(matched or slots, matched_request=bool(requested and matched))
@@ -281,33 +469,52 @@ async def get_available_slots(
 
 async def schedule_call(
     start: str,
-    attendee_name: str,
-    attendee_email: str,
+    attendee_name: str = "",
+    attendee_email: str = "",
     time_zone: str = "America/New_York",
 ) -> str:
     username, slug = _identity()
     if not username or not slug:
         return "Scheduling is not configured. Ask them to use Let's Talk on the site."
 
-    local = _as_local(start, time_zone)
-    day = local.date().isoformat() if local else None
-    slots, error = await _slot_starts(day, day, time_zone)
-    if error:
-        return error
-    if start not in slots:
-        listed = "\n".join(f"- {slot}" for slot in slots[:3])
+    name = (attendee_name or "").strip()
+    email = (attendee_email or "").strip()
+    if not name or not _usable_email(email):
         return (
-            "That time is not available. Do not book it. "
-            f"Share at most these 3 slots, then ask if another time would help:\n{listed}"
+            "Do not claim the meeting is booked. Ask for the visitor's name and a real email that can receive mail, "
+            f"then call schedule_call again with the same start ({start})."
         )
 
+    local = _as_local(start, time_zone) or _instant(start)
+    day = local.astimezone(_zone(time_zone)).date().isoformat() if local else None
+    search_end = (local.astimezone(_zone(time_zone)).date() + timedelta(days=3)).isoformat() if local else None
+    slots, error = await _slot_starts(day, search_end or day, time_zone)
+    if error:
+        return error
+    matched = _find_slot(start, slots, time_zone)
+    if not matched:
+        target = _requested_target(start, time_zone, day)
+        closest = (_closest_slots(slots, target) if target else slots[:3]) or slots[:3]
+        nearest = closest[0] if closest else ""
+        listed = "\n".join(f"- {slot}" for slot in closest[:3])
+        return (
+            "That exact time is not available. Do not book it and do not say it was free. "
+            "Tell them it is not available. Recommend the next closest real slot and ask if they want to proceed with that instead.\n"
+            f"{listed}"
+            + (f"\nIf they agree, call schedule_call with this exact start: {nearest}" if nearest else "")
+        )
+
+    utc_start = _to_utc_start(matched)
+    if not utc_start:
+        return "That start time could not be converted to UTC. Ask them to pick another listed slot."
+
     body = {
-        "start": start,
+        "start": utc_start,
         "eventTypeSlug": slug,
         "username": username,
         "attendee": {
-            "name": attendee_name,
-            "email": attendee_email,
+            "name": name,
+            "email": email,
             "timeZone": time_zone,
             "language": "en",
         },
@@ -323,13 +530,10 @@ async def schedule_call(
             json=body,
         )
     if response.status_code >= 400:
-        return (
-            f"Booking failed ({response.status_code}). Do not claim it is booked. "
-            "Ask them to pick another listed slot or use Let's Talk."
-        )
+        return _booking_error(response)
 
     data = response.json().get("data") or response.json()
-    start_time = data.get("start") or start
+    start_time = data.get("start") or utc_start
     return (
         f"Booking confirmed for {start_time}. Tell them it is on the calendar. "
         "Do not share Saumay's email, phone, or other contact details."
