@@ -1,15 +1,24 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { cn } from "@/lib/cn";
+import { CalProvider } from "@/components/CalProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { MotionProvider, useMotion } from "@/components/motion/MotionProvider";
 import { SmoothScroll } from "@/components/motion/SmoothScroll";
 
+const AgentWidget = dynamic(
+  () => import("@/components/AgentWidget").then((mod) => mod.AgentWidget),
+  { ssr: false },
+);
+
 export function AppShell({ children }: { children: React.ReactNode }) {
   return (
     <MotionProvider>
-      <ShellBody>{children}</ShellBody>
+      <CalProvider>
+        <ShellBody>{children}</ShellBody>
+      </CalProvider>
     </MotionProvider>
   );
 }
@@ -43,6 +52,7 @@ function ShellBody({ children }: { children: React.ReactNode }) {
         </main>
         <Footer />
       </div>
+      <AgentWidget />
     </>
   );
 }

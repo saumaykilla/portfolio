@@ -2,11 +2,12 @@ import { AppLink } from "@/components/motion/AppLink";
 import { cn } from "@/lib/cn";
 
 type ButtonProps = {
-  href: string;
+  href?: string;
   children: React.ReactNode;
   variant?: "primary" | "secondary" | "ghost";
   className?: string;
   external?: boolean;
+  onClick?: () => void;
 };
 
 export function Button({
@@ -15,6 +16,7 @@ export function Button({
   variant = "primary",
   className,
   external,
+  onClick,
 }: ButtonProps) {
   const styles = {
     primary:
@@ -30,16 +32,24 @@ export function Button({
     className,
   );
 
-  if (external) {
+  if (onClick && !href) {
     return (
-      <a href={href} target="_blank" rel="noreferrer" className={classes}>
+      <button type="button" className={classes} onClick={onClick}>
+        {children}
+      </button>
+    );
+  }
+
+  if (external && href) {
+    return (
+      <a href={href} target="_blank" rel="noreferrer" className={classes} onClick={onClick}>
         {children}
       </a>
     );
   }
 
   return (
-    <AppLink href={href} className={classes}>
+    <AppLink href={href ?? "/#home"} className={classes} onClick={onClick}>
       {children}
     </AppLink>
   );

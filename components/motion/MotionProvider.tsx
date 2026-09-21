@@ -19,6 +19,8 @@ type Overlay = "none" | "menu" | "modal";
 type MotionContextValue = {
   overlay: Overlay;
   setOverlay: (overlay: Overlay) => void;
+  bookingOpen: boolean;
+  setBookingOpen: (open: boolean) => void;
   introDone: boolean;
   introPlaying: boolean;
   activeSection: SectionId;
@@ -42,19 +44,30 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   const router = useRouter();
   const pathname = usePathname();
   const [overlay, setOverlay] = useState<Overlay>("none");
+  const [bookingOpen, setBookingOpen] = useState(false);
   const [introDone, setIntroDone] = useState(false);
   const [introPlaying, setIntroPlaying] = useState(false);
   const [activeSection, setActiveSection] = useState<SectionId>("home");
   const scrollerRef = useRef<((y: number) => void) | null>(null);
+  const scrollLocked = overlay === "modal" || bookingOpen;
 
   useEffect(() => {
     document.documentElement.classList.toggle("is-blurred", overlay !== "none");
-    document.documentElement.classList.toggle("is-locked", overlay === "modal");
+    document.documentElement.classList.toggle("is-locked", scrollLocked);
+    if (!scrollLocked && document.body.style.overflow === "hidden") {
+      document.body.style.overflow = "";
+    }
 
-    if (overlay !== "modal") return;
+    if (!scrollLocked) return;
 
-    const allow = (event: Event) =>
-      Boolean((event.target as HTMLElement | null)?.closest("[data-native-scroll]"));
+    const allow = (event: Event) => {
+      const node = event.target;
+      if (!(node instanceof Element)) return false;
+      if (node.closest("[data-native-scroll], iframe, input, textarea, select, [contenteditable='true']")) {
+        return true;
+      }
+      return node instanceof HTMLElement && node.isContentEditable;
+    };
 
     const block = (event: Event) => {
       if (allow(event)) return;
@@ -79,7 +92,7 @@ export function MotionProvider({ children }: { children: ReactNode }) {
       window.removeEventListener("touchmove", block);
       window.removeEventListener("keydown", onKey);
     };
-  }, [overlay]);
+  }, [scrollLocked]);
 
   useEffect(() => {
     setOverlay("none");
@@ -170,8 +183,18 @@ export function MotionProvider({ children }: { children: ReactNode }) {
   }, [pathname]);
 
   const value = useMemo(
-    () => ({ overlay, setOverlay, introDone, introPlaying, activeSection, to, setScroller }),
-    [overlay, introDone, introPlaying, activeSection, to, setScroller],
+    () => ({
+      overlay,
+      setOverlay,
+      bookingOpen,
+      setBookingOpen,
+      introDone,
+      introPlaying,
+      activeSection,
+      to,
+      setScroller,
+    }),
+    [overlay, bookingOpen, introDone, introPlaying, activeSection, to, setScroller],
   );
 
   return (

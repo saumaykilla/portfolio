@@ -1,9 +1,39 @@
 "use client";
 
+import Image from "next/image";
 import { content } from "@/lib/content";
 import { FadeIn } from "@/components/FadeIn";
 import { PageHeader } from "@/components/ui";
 import { TechIcon } from "@/components/TechIcon";
+
+function OrgLogo({
+  src,
+  alt,
+  fallback,
+  color,
+}: {
+  src?: string;
+  alt: string;
+  fallback?: string;
+  color?: string;
+}) {
+  if (src?.startsWith("/")) {
+    return (
+      <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-2xl border border-ink/8 bg-white">
+        <Image src={src} alt={alt} fill sizes="48px" className="object-contain p-1.5" />
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-lg font-semibold text-white"
+      style={{ backgroundColor: color ?? "#C45A38" }}
+    >
+      {fallback ?? alt.slice(0, 1)}
+    </div>
+  );
+}
 
 export function ExperienceList() {
   const { work } = content;
@@ -24,12 +54,12 @@ export function ExperienceList() {
             <article className="rounded-[22px] border border-ink/6 bg-white p-5 shadow-[0_10px_32px_rgba(28,22,18,0.04)] sm:p-7">
               <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                 <div className="flex gap-4">
-                  <div
-                    className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl text-lg font-semibold text-white"
-                    style={{ backgroundColor: job.logoColor }}
-                  >
-                    {job.logo}
-                  </div>
+                  <OrgLogo
+                    src={job.logo}
+                    alt={`${job.company} logo`}
+                    fallback={job.logo}
+                    color={job.logoColor}
+                  />
                   <div>
                     <h2 className="font-display text-xl font-semibold text-ink">
                       {job.company}
@@ -78,15 +108,18 @@ export function ExperienceList() {
           <div className="mt-5 grid gap-4 sm:grid-cols-2">
             {work.education.map((school, index) => (
               <FadeIn key={school.id} x={index % 2 === 0 ? -40 : 40} delay={index * 0.08}>
-                <article className="rounded-[20px] border border-ink/6 bg-white p-5">
-                  <p className="text-sm text-terracotta">{school.degree}</p>
-                  <h3 className="mt-1 font-display text-lg font-semibold text-ink">
-                    {school.school}
-                  </h3>
-                  <p className="text-sm text-muted">{school.field}</p>
-                  {school.location ? (
-                    <p className="mt-2 text-xs text-muted">{school.location}</p>
-                  ) : null}
+                <article className="flex items-start gap-4 rounded-[20px] border border-ink/6 bg-white p-5">
+                  <OrgLogo src={school.logo} alt={`${school.school} logo`} fallback={school.school} />
+                  <div>
+                    <p className="text-sm text-terracotta">{school.degree}</p>
+                    <h3 className="mt-1 font-display text-lg font-semibold text-ink">
+                      {school.school}
+                    </h3>
+                    <p className="text-sm text-muted">{school.field}</p>
+                    {school.location ? (
+                      <p className="mt-2 text-xs text-muted">{school.location}</p>
+                    ) : null}
+                  </div>
                 </article>
               </FadeIn>
             ))}

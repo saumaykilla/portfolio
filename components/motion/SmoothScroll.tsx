@@ -6,10 +6,10 @@ import { useMotion } from "@/components/motion/MotionProvider";
 
 export function SmoothScroll() {
   const pathname = usePathname();
-  const { overlay, introDone, setScroller } = useMotion();
-  const overlayRef = useRef(overlay);
+  const { overlay, bookingOpen, introDone, setScroller } = useMotion();
+  const lockedRef = useRef(false);
   const introRef = useRef(introDone);
-  overlayRef.current = overlay;
+  lockedRef.current = overlay === "modal" || bookingOpen;
   introRef.current = introDone;
 
   useEffect(() => {
@@ -29,8 +29,11 @@ export function SmoothScroll() {
     });
 
     const tick = () => {
-      if (overlayRef.current === "modal") {
+      if (lockedRef.current) {
         target = current;
+        if (Math.abs(window.scrollY - current) > 0.5) {
+          window.scrollTo(0, current);
+        }
         frame = requestAnimationFrame(tick);
         return;
       }
@@ -47,8 +50,10 @@ export function SmoothScroll() {
 
     const onWheel = (event: WheelEvent) => {
       if (!introRef.current) return;
-      const native = (event.target as HTMLElement | null)?.closest("[data-native-scroll]");
-      if (overlayRef.current === "modal") {
+      const node = event.target;
+      const native =
+        node instanceof Element && node.closest("[data-native-scroll], iframe");
+      if (lockedRef.current) {
         if (!native) event.preventDefault();
         return;
       }
@@ -59,6 +64,12 @@ export function SmoothScroll() {
     };
 
     const onScroll = () => {
+      if (lockedRef.current) {
+        if (Math.abs(window.scrollY - current) > 0.5) {
+          window.scrollTo(0, current);
+        }
+        return;
+      }
       if (performance.now() - lastProgrammatic < 64) return;
       current = window.scrollY;
       target = window.scrollY;

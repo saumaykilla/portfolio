@@ -20,7 +20,8 @@
     },
     "navCta": {
       "label": "Let's Talk",
-      "href": "/#contact"
+      "href": "/#contact",
+      "action": "cal"
     },
     "navigation": [
       { "label": "Home", "href": "/#home" },
@@ -57,6 +58,13 @@
       { "name": "LiveKit", "icon": "livekit", "color": "#1FD5F9" }
     ],
     "footer": "© 2026 Saumay Killa. All rights reserved."
+  },
+  "booking": {
+    "calLink": "saumay-killa-r2jxhr/45min",
+    "layout": "month_view",
+    "theme": "light",
+    "brandColor": "#c45a38",
+    "namespace": "portfolio"
   },
   "projects": {
     "eyebrow": "Selected Work",
@@ -401,7 +409,7 @@
       {
         "id": "humainority",
         "company": "HumAInority",
-        "logo": "H",
+        "logo": "/company/humainority.jpeg",
         "logoColor": "#C45A38",
         "role": "Founding Engineer / Full Stack",
         "location": "New York, NY",
@@ -425,7 +433,7 @@
       {
         "id": "sap-concur",
         "company": "SAP Concur",
-        "logo": "S",
+        "logo": "/company/sap.jpeg",
         "logoColor": "#0070F2",
         "role": "Market Strategy Consultant",
         "location": "New York, NY",
@@ -445,7 +453,7 @@
       {
         "id": "wiz",
         "company": "Wiz Freight",
-        "logo": "W",
+        "logo": "/company/wiz.avif",
         "logoColor": "#2B5CFF",
         "role": "Software Developer",
         "location": "Chennai",
@@ -468,7 +476,7 @@
       {
         "id": "highradius",
         "company": "HighRadius",
-        "logo": "Hr",
+        "logo": "/company/highradius.png",
         "logoColor": "#F36F21",
         "role": "Software Engineer",
         "location": "Bhubaneswar",
@@ -491,6 +499,7 @@
       {
         "id": "nyu",
         "school": "New York University",
+        "logo": "/company/nyu.png",
         "degree": "Master of Science",
         "field": "Management Information Systems",
         "location": "New York, NY"
@@ -498,6 +507,7 @@
       {
         "id": "srm",
         "school": "SRM Institute of Science and Technology",
+        "logo": "/company/srm.png",
         "degree": "Bachelor of Technology",
         "field": "Computer Science",
         "location": "India"

@@ -6,11 +6,17 @@ import { cn } from "@/lib/cn";
 import { Button } from "@/components/ui";
 import { AppLink } from "@/components/motion/AppLink";
 import { useMotion } from "@/components/motion/MotionProvider";
+import { useCalBooking } from "@/components/CalProvider";
 import { sectionIdFromHref } from "@/lib/nav";
 
 export function Navbar() {
   const { overlay, setOverlay, to, activeSection } = useMotion();
+  const { openBooking } = useCalBooking();
   const open = overlay === "menu";
+  const talk = () => {
+    if (content.site.navCta.action === "cal") openBooking();
+    else to(content.site.navCta.href);
+  };
 
   return (
     <header className="sticky top-0 z-40 bg-cream/90 shadow-[0_1px_0_rgba(28,22,18,0.06)] backdrop-blur-md">
@@ -51,7 +57,7 @@ export function Navbar() {
         </nav>
 
         <div className="hidden lg:block">
-          <Button href={content.site.navCta.href} className="px-5 py-2.5 text-[13px]">
+          <Button className="px-5 py-2.5 text-[13px]" onClick={talk}>
             {content.site.navCta.label}
           </Button>
         </div>
@@ -111,7 +117,7 @@ export function Navbar() {
                 className="mt-3 w-full rounded-full bg-terracotta py-3 text-sm font-medium text-white"
                 onClick={() => {
                   setOverlay("none");
-                  to(content.site.navCta.href);
+                  talk();
                 }}
               >
                 {content.site.navCta.label}

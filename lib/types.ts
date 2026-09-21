@@ -12,6 +12,15 @@ export type SocialLink = {
 export type Cta = {
   label: string;
   href: string;
+  action?: "link" | "cal";
+};
+
+export type BookingConfig = {
+  calLink: string;
+  layout: "month_view" | "week_view" | "column_view";
+  theme: "light" | "dark" | "auto";
+  brandColor: string;
+  namespace: string;
 };
 
 export type TechItem = {
@@ -51,7 +60,7 @@ export type Experience = {
   id: string;
   company: string;
   logo: string;
-  logoColor: string;
+  logoColor?: string;
   role: string;
   location?: string;
   start: string;
@@ -64,6 +73,7 @@ export type Experience = {
 export type Education = {
   id: string;
   school: string;
+  logo?: string;
   degree: string;
   field: string;
   location?: string;
@@ -119,6 +129,7 @@ export type SiteContent = {
     techStack: TechItem[];
     footer: string;
   };
+  booking: BookingConfig;
   projects: {
     eyebrow: string;
     title: string;

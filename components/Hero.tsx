@@ -8,7 +8,8 @@ import { TechIcon } from "@/components/TechIcon";
 import { FadeIn } from "@/components/FadeIn";
 
 export function Hero() {
-  const { site } = content;
+  const { site, skills } = content;
+  const marqueeSkills = skills.categories.flatMap((category) => category.skills);
 
   return (
     <section
@@ -55,13 +56,26 @@ export function Hero() {
       </div>
 
       <FadeIn eager delay={0.3} className="mt-4 w-full sm:mt-6">
-        <div className="flex w-full flex-nowrap items-center gap-x-4 overflow-x-auto whitespace-nowrap pb-2 sm:gap-x-6 lg:gap-x-8">
-          {site.techStack.map((tech) => (
-            <div key={tech.name} className="flex shrink-0 items-center gap-2 text-ink/55">
-              <TechIcon name={tech.icon} color={tech.color} className="h-6 w-6" title={tech.name} />
-              <span className="hidden text-sm font-medium sm:inline">{tech.name}</span>
-            </div>
-          ))}
+        <div
+          className="skill-marquee relative -mx-5 overflow-hidden sm:-mx-8"
+          aria-label="Skills"
+        >
+          <div className="skill-marquee-track">
+            {[0, 1].map((copy) => (
+              <ul
+                key={copy}
+                className="flex items-center gap-x-8 px-4 sm:gap-x-10 sm:px-6"
+                aria-hidden={copy === 1}
+              >
+                {marqueeSkills.map((tech) => (
+                  <li key={`${copy}-${tech.name}`} className="flex shrink-0 items-center gap-2.5 text-ink/60">
+                    <TechIcon name={tech.icon} color={tech.color} className="h-6 w-6" title={tech.name} />
+                    <span className="text-sm font-medium whitespace-nowrap">{tech.name}</span>
+                  </li>
+                ))}
+              </ul>
+            ))}
+          </div>
         </div>
       </FadeIn>
     </section>
