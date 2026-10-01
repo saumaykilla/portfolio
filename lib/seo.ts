@@ -16,13 +16,13 @@ const github = content.site.social.find((item) => item.name === "GitHub")?.href 
 export const seo = {
   name: content.site.name,
   firstName: content.site.firstName,
-  role: "Software Developer, AI Engineer, Frontend & Backend Engineer",
+  role: "Software Developer, AI Engineer, Frontend Developer",
   location: content.site.location,
   email: content.site.email,
   photo: `${SITE_URL}${content.site.photo}`,
-  title: `${content.site.name} | Software Developer, AI Engineer, Frontend & Backend`,
+  title: `${content.site.name} | Software Developer & AI Engineer`,
   description:
-    "Saumay Killa is a software developer and AI engineer in New York. Full stack frontend and backend engineering with React, Next.js, TypeScript, Python, and AWS — shipping AI products and production web applications.",
+    "Saumay Killa is a software developer and AI engineer in New York who builds production web applications and AI systems end to end with React, TypeScript, Node.js, Python, AWS, and PostgreSQL.",
   keywords: [
     "software developer",
     "software engineer",
@@ -87,7 +87,7 @@ export function jsonLdGraph() {
         url: SITE_URL,
         image: seo.photo,
         email: seo.email,
-        jobTitle: ["Software Developer", "AI Engineer", "Full Stack Engineer"],
+        jobTitle: ["Software Developer", "AI Engineer", "Frontend Developer"],
         description: content.site.bio,
         knowsAbout: [
           "Software engineering",

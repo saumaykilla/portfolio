@@ -4,7 +4,7 @@ This file is the only source of truth for the site assistant. It contains public
 
 ## Who he is
 
-Saumay Killa is a software developer and AI engineer based in New York. He works across frontend and backend — React, Next.js, TypeScript, Python, and AWS — and ships full stack products, from realtime AI platforms to production web apps.
+Saumay Killa is a software developer and AI engineer based in New York. He builds production web applications and AI systems end to end — system design, interfaces, backend services, testing, observability, and deployment — using React, TypeScript, Node.js, Python, AWS, and PostgreSQL.
 
 Public role line: Software Developer · AI Engineer.
 
@@ -34,13 +34,13 @@ AWS Eventflow — Terraform for a serverless file pipeline: S3 → SQS → Lambd
 
 ## Work
 
-HumAInority — Founding Engineer / Full Stack, New York, Sep 2024 to Present. Owns the UI system, realtime layer, and serverless backend for an AI platform that expands career access. Built WCAG 2.2 React components from generative model output. Zustand for concurrent WebSocket and async AI streams under 200ms perceived latency. AWS Lambda, SQS, Postgres with about 40% overhead reduction. Jest, React Testing Library, and E2E in CI/CD, 60% faster release cycles. Onboarding completion up 60%.
+HumAInority — Founding AI Engineer, New York, Sep 2024 to Apr 2026. Owned technical architecture and engineering execution across AI and full-stack products from requirements to production. Built a self-service hospitality guest check-in app integrated with a PMS and Slack, cutting manual handling by 80%. Engineered Node.js, WebSocket, AWS Lambda, and PostgreSQL event-driven infrastructure, reducing integration time by 30%. Supported 50K+ monthly requests while cutting cloud costs by 40%. Built Jest, Playwright, and GitHub Actions test coverage that cut regression bugs by 80% and release cycles by 60%. Implemented AWS CloudWatch and LangSmith observability. Architected multi-agent outbound sales and job-search systems that lifted reply rates by 60%.
 
 SAP Concur — Market Strategy Consultant, New York, Jan 2025 to May 2025. Go-to-market work for the mid-market segment: research, ICPs, pitch decks.
 
-Wiz Freight — Software Developer, Chennai, Apr 2022 to Jul 2023. First centralized React component library, about 20% faster feature work. Marketing site rebuild in React + Tailwind with 40% faster loads and 15% more trial conversions. Redux optimizations.
+Wiz Freight — Frontend Developer, Chennai, Apr 2022 to Jul 2023. Built a centralized TypeScript and GraphQL component library adopted across four product teams, accelerating feature delivery by 20%. Rebuilt the marketing site in React and Tailwind with a 15% conversion lift and 40% faster loads. Refactored Redux, introduced Storybook visual regression testing, and led Agile sprints for a cross-functional team of eight.
 
-HighRadius — Software Engineer, Bhubaneswar, Aug 2021 to Mar 2022. Invoice-clearance ML models with about 16% better forecast accuracy. Python Excel reporting automation, about 40% less weekly prep.
+HighRadius — Software Developer, Bhubaneswar, Aug 2021 to Mar 2022. Built ML forecasting, document automation, and analytical tools for enterprise finance clients. Replaced manual ETL with Python and JavaScript workflows, reducing reporting turnaround by 40%. Improved held-out ML model precision by approximately 18%, deployed invoice-clearance models as REST APIs, and reduced model retraining cycles by 45% with pandas and scikit-learn automation.
 
 ## Education
 
@@ -50,17 +50,19 @@ Bachelor of Technology, Computer Science, SRM Institute of Science and Technolog
 
 ## Skills
 
-Frontend: React, Next.js, TypeScript, Tailwind CSS, HTML5, CSS3, React Native, Expo.
+Frontend: React, Next.js, TypeScript, Tailwind CSS, HTML5, CSS3, React Native, Expo, Vite, WCAG 2.2 Accessibility.
 
 Backend: Node.js, Python, FastAPI, Express, GraphQL, REST APIs, LangGraph, LiveKit, WebSockets.
 
-Databases and cloud: PostgreSQL, Redis, Supabase, Pinecone, SpacetimeDB, AWS, Docker, Kubernetes.
+Databases and cloud: PostgreSQL, MySQL, MongoDB, Redis, Supabase, AWS, Docker, Terraform, GitHub Actions, AWS CloudWatch.
 
-AI and tools: OpenAI, Gemini, Claude, LangChain, Jest, Playwright, Git.
+AI: OpenAI, Gemini, Claude, LangChain, LangGraph, RAG, multi-agent systems, prompt engineering.
+
+Testing and quality: Jest, React Testing Library, Playwright, Storybook, GitHub Actions, AWS CloudWatch, LangSmith.
 
 ## Achievements
 
-50K+ monthly requests in production. 99.9% API uptime. About 40% API cost optimization on AWS serverless. 40% faster reporting turnaround at HighRadius. 60% onboarding completion lift at HumAInority. 95+ Lighthouse on production frontend.
+50K+ monthly requests in production. 80% less manual handling for a hospitality guest check-in workflow. About 40% cloud cost optimization on AWS serverless. 40% faster reporting turnaround at HighRadius. 80% fewer regression bugs through automated testing. 60% higher outbound reply rates from a multi-agent sales system.
 
 ## Scheduling rules
 
