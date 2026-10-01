@@ -1,7 +1,7 @@
 "use client";
 
 import type { IconType } from "react-icons";
-import { FaAws, FaLinkedin } from "react-icons/fa";
+import { FaAws, FaLinkedin, FaUniversalAccess } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 import {
   SiAnthropic,
@@ -20,6 +20,8 @@ import {
   SiKubernetes,
   SiLangchain,
   SiLivekit,
+  SiMongodb,
+  SiMysql,
   SiNextdotjs,
   SiNodedotjs,
   SiPostgresql,
@@ -29,10 +31,12 @@ import {
   SiRedis,
   SiRedux,
   SiSocketdotio,
+  SiStorybook,
   SiSupabase,
   SiTailwindcss,
   SiTerraform,
   SiTypescript,
+  SiVite,
 } from "react-icons/si";
 import { cn } from "@/lib/cn";
 
@@ -62,6 +66,8 @@ const SIMPLE_ICONS: Record<string, IconType> = {
   graphql: SiGraphql,
   postgresql: SiPostgresql,
   postgres: SiPostgresql,
+  mongodb: SiMongodb,
+  mysql: SiMysql,
   redis: SiRedis,
   supabase: SiSupabase,
   docker: SiDocker,
@@ -77,8 +83,11 @@ const SIMPLE_ICONS: Record<string, IconType> = {
   git: SiGit,
   github: SiGithub,
   linkedin: FaLinkedin,
+  accessibility: FaUniversalAccess,
   redux: SiRedux,
   terraform: SiTerraform,
+  vite: SiVite,
+  storybook: SiStorybook,
   pytorch: SiPytorch,
   socketdotio: SiSocketdotio,
   websockets: SiSocketdotio,
